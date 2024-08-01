@@ -26,12 +26,13 @@ function cf_elementor_addon( $widgets_manager ) {
 	require_once( __DIR__ . '/includes/widgets/most_popular_posts.php' );
 	require_once( __DIR__ . '/includes/widgets/all_categories.php' );
 	require_once( __DIR__ . '/includes/widgets/all_post_tags.php' );
+	require_once( __DIR__ . '/includes/widgets/recent_works.php' );
 	$widgets_manager->register( new \Elementor_website_logo());
 	$widgets_manager->register( new \Elementor_posts());
 	$widgets_manager->register( new \Elementor_search_box());
 	$widgets_manager->register( new \Elementor_most_popular_post);
 	$widgets_manager->register( new \Elementor_all_categories);
-	$widgets_manager->register( new \Elementor_all_post_tags);
+	$widgets_manager->register( new \Elementor_our_portfolio);
 }
 add_action( 'elementor/widgets/register', 'cf_elementor_addon' );
 
@@ -44,3 +45,12 @@ function searchFilter($query) {
     return $query;
 }
 add_filter('pre_get_posts','searchFilter');
+
+function our_portfolio_script() {
+	wp_register_script( 'our_portfolio_script', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js', array(), false );
+	}
+	add_action( 'wp_enqueue_scripts', 'our_portfolio_script' );
+function our_portfolio_style() {
+	wp_enqueue_style( 'our_portfolio_style', 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', false );
+	}
+	add_action( 'wp_enqueue_scripts', 'our_portfolio_style' );
