@@ -28,6 +28,10 @@ function cf_elementor_addon( $widgets_manager ) {
 	require_once( __DIR__ . '/includes/widgets/all_post_tags.php' );
 	require_once( __DIR__ . '/includes/widgets/recent_works.php' );
 	require_once( __DIR__ . '/includes/widgets/single_post.php' );
+	require_once( __DIR__ . '/includes/widgets/categories.php' );
+	require_once( __DIR__ . '/includes/widgets/author.php' );
+	require_once( __DIR__ . '/includes/widgets/tag.php' );
+	require_once( __DIR__ . '/includes/widgets/search.php' );
 	$widgets_manager->register( new \Elementor_website_logo());
 	$widgets_manager->register( new \Elementor_posts());
 	$widgets_manager->register( new \Elementor_search_box());
@@ -36,6 +40,10 @@ function cf_elementor_addon( $widgets_manager ) {
 	$widgets_manager->register( new \Elementor_our_portfolio);
 	$widgets_manager->register( new \Elementor_all_post_tags);
 	$widgets_manager->register( new \Elementor_single_post);
+	$widgets_manager->register( new \Elementor_categories);
+	$widgets_manager->register( new \Elementor_author);
+	$widgets_manager->register( new \Elementor_tag);
+	$widgets_manager->register( new \Elementor_search);
 }
 add_action( 'elementor/widgets/register', 'cf_elementor_addon' );
 

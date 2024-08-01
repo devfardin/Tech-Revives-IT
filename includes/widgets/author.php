@@ -1,11 +1,11 @@
 <?php
-class Elementor_single_post extends \Elementor\Widget_Base {
+class Elementor_author extends \Elementor\Widget_Base {
 
     public function get_name() {
-        return 'single_post';
+        return 'tri_author';
     }
     public function get_title() {
-        return esc_html__( 'single_post', 'tri' );
+        return esc_html__( 'author', 'tri' );
     }
     public function get_icon() {
         return 'eicon-post-list';
@@ -14,14 +14,14 @@ class Elementor_single_post extends \Elementor\Widget_Base {
         return [ 'basic' ];
     }
     public function get_keywords() {
-        return [ 'single_post','tri' ];
+        return [ 'author','tri' ];
     }
     protected function register_controls() {
 
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'single_post', 'tri' ),
+                'label' => esc_html__( 'author', 'tri' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -29,14 +29,14 @@ class Elementor_single_post extends \Elementor\Widget_Base {
     }
 
     protected function render() {
-        $this->render_inline_styles(); 
-        ?>
-    
 
-    <section class="posts_row">
-         
-        <article class="post__container">
-            <div class="post_thumb">
+        $this->render_inline_styles();  ?>
+
+    <section class="author_row">
+         <?php if ( have_posts() ):  
+            while ( have_posts() ): the_post();?>
+        <article class="author__container">
+            <div class="author_thumb">
                 <a href="<?php the_permalink(); ?>" rel="bookmark"
                     aria-label="More about <?php echo get_the_title(); ?>">
                     <?php the_post_thumbnail('medium'); ?>
@@ -44,14 +44,14 @@ class Elementor_single_post extends \Elementor\Widget_Base {
             </div>
         
 
-            <div class="single_post__info_wrap">
+            <div class="author__info_wrap">
                 <!-- Post Meta Info Start-->
-                <div class="single_post__meta_info_wrap">
+                <div class="author__meta_info_wrap">
                 <?php $author_id= get_the_author_meta('ID'); ?>
                 
                 <!-- post Author Inof    -->
-                    <div class="single_post__auther_wrap">
-                        <a href="<?php  echo get_author_posts_url( $author_id );?>"     class='single_post__auther'>
+                    <div class="author__auther_wrap">
+                        <a href="<?php  echo get_author_posts_url( $author_id );?>"     class='author__auther'>
                             <img  class='most-popular-post__author_avatar'
                             src="<?php echo get_avatar_url($author_id)?>" alt="<?php echo get_the_author_meta('display_name', $author_id) ?>" >
 
@@ -75,63 +75,62 @@ class Elementor_single_post extends \Elementor\Widget_Base {
                         </h3>
                     </div>       
             </div>
-            <!-- Posts Meta Info End -->
+            <!-- author Meta Info End -->
             <!-- --------------------------- -->
-            <div class='single_post_text__info'>
+            <div class='author_text__info'>
                 <!-- Post Title -->
-                <a href="<?php the_permalink(); ?>" class="single_post__post__title">
-                    <?php echo get_the_title(); ?>
+                <a href="<?php the_permalink(); ?>" class="most-popular-author__post__title">
+                    <?php echo substr(get_the_title(), 0, 40 ); ?>
                 </a>
                 <!-- Post Description  -->
                 <p>
                 <?php
                     $post_content= get_the_content();
-                    echo  $post_content; ?>
+                    echo substr( $post_content, 0, 300); ?>
                 </p>
-
-            
-
-            
+                
             </div>
         </div>
         </article>
-        
+            <?php endwhile; ?>
+            <?php wp_reset_query(); ?>
+            <?php endif; ?>
         </section>
     <?php
     }
     protected function render_inline_styles(){ ?>
          <style>
-            .single_post_row {
+            .author_row {
                 display: flex;
                 flex-direction: column;
                 gap: 55px;
             }
-            .post_thumb a img {
+            .author_thumb a img {
                 border-radius: 25px;
             }
-            .single_post__auther{
+            .author__auther{
                 display:flex;
                 align-items: center;
                 gap: 15px;
             }
-            .single_post__auther img {
+            .author__auther img {
                 width: 50px;
                 height: 50px;
                 object-fit: cover;
                 border-radius: 50px;
             }
-            .single_post__auther h3 {
+            .author__auther h3 {
                 margin: 0px;
                 font-size: 17px;
                 font-weight: 400;
                 color: #262420;
             }
             @media only screen and (min-width:425px){
-                .single_post__auther h3 {
+                .author__auther h3 {
                 font-size: 20px;
                 }
             }
-            .single_post__meta_info_wrap {
+            .author__meta_info_wrap {
                 display: flex;
                 align-items: center;
                 gap: 25px;
@@ -160,10 +159,10 @@ class Elementor_single_post extends \Elementor\Widget_Base {
                 padding: 0px;
                 fill: var(--e-global-color-primary);
             }
-            .single_post_text__info{
+            .author_text__info{
                 margin-top:10px;
             }
-            .single_post_text__info a {
+            .author_text__info a {
                 color: #222222;
                 font-size: 25px;
                 line-height:1.2em;
@@ -172,24 +171,24 @@ class Elementor_single_post extends \Elementor\Widget_Base {
                 margin-bottom:10px;
             }
             @media only screen and (min-width:768px){
-                .single_post_text__info a {
+                .author_text__info a {
                 font-size: 34px;
             }
             }
 
-            .single_post_text__info a:hover {
+            .author_text__info a:hover {
                 color:var(--e-global-color-primary)
             }
-            .single_post_text__info p {
+            .author_text__info p {
                 font-size: 18px;
                 color: #585858;
                 margin: 10px 0;
             }
             @media only screen and (min-width:768px){
-                .single_post_text__info p {
+                .author_text__info p {
                 font-size: 20px;
             }
-            }    
+            }
          </style>
         <?php
     }

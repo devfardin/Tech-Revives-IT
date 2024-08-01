@@ -58,27 +58,27 @@ class Elementor_all_post_tags extends \Elementor\Widget_Base {
                     flex-wrap:wrap;
                 }
                 .all_post_tags__container a{
-                    color: #838383;
+                    color: #838383 !important;
                     display: block;
                     font-size: 16px;
                     font-family: 'Rubik';
                     line-height:1.5em;
                     transition:0.4s;
                     padding:8px 10px;
-                    border:1px solid rgba(225, 224, 224, 0.2);
+                    border:1px solid rgba(225, 224, 224, 0.2) !important;
                     display:inline;
                 }
                 .all_post_tags__container a:hover{
-                    background:var(--e-global-color-primary);
-                    border-color:var(--e-global-color-primary);
-                    color:white;
+                    background:var(--e-global-color-primary) !important;
+                    border-color:var(--e-global-color-primary) !important;
+                    color:white !important;
                 }
                 
                 .no_have_tags h3{
                     font-size:18px;
                     text-align:center;
                     font-weight:400;
-                    color:var(--e-global-color-primary);
+                    color:var(--e-global-color-primary) !important;
                     font-family: 'Rubik';
                     padding: 20px 0;
                 }
