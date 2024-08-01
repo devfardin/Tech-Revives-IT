@@ -1,11 +1,11 @@
 <?php
-class Elementor_posts extends \Elementor\Widget_Base {
+class Elementor_single_post extends \Elementor\Widget_Base {
 
     public function get_name() {
-        return 'tri_posts';
+        return 'single_post';
     }
     public function get_title() {
-        return esc_html__( 'posts', 'tri' );
+        return esc_html__( 'single_post', 'tri' );
     }
     public function get_icon() {
         return 'eicon-post-list';
@@ -14,14 +14,14 @@ class Elementor_posts extends \Elementor\Widget_Base {
         return [ 'basic' ];
     }
     public function get_keywords() {
-        return [ 'posts','tri' ];
+        return [ 'single_post','tri' ];
     }
     protected function register_controls() {
 
         $this->start_controls_section(
             'content_section',
             [
-                'label' => esc_html__( 'Posts', 'tri' ),
+                'label' => esc_html__( 'single_post', 'tri' ),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
@@ -29,20 +29,12 @@ class Elementor_posts extends \Elementor\Widget_Base {
     }
 
     protected function render() {
-
         $this->render_inline_styles(); 
-        $settings = $this->get_settings_for_display();
-        $popularpost  = new WP_Query(array(
-            'posts_per_page' => 6,
-            'post_type' => 'post',
-            'post_status' => 'publish'
-        ));
         ?>
+    
 
     <section class="posts_row">
-         <?php if ($popularpost->have_posts()):  
-                while ($popularpost->have_posts()):
-                $popularpost->the_post(); ?>
+         
         <article class="post__container">
             <div class="post_thumb">
                 <a href="<?php the_permalink(); ?>" rel="bookmark"
@@ -52,14 +44,14 @@ class Elementor_posts extends \Elementor\Widget_Base {
             </div>
         
 
-            <div class="posts__info_wrap">
+            <div class="single_post__info_wrap">
                 <!-- Post Meta Info Start-->
-                <div class="posts__meta_info_wrap">
+                <div class="single_post__meta_info_wrap">
                 <?php $author_id= get_the_author_meta('ID'); ?>
                 
                 <!-- post Author Inof    -->
-                    <div class="posts__auther_wrap">
-                        <a href="<?php  echo get_author_posts_url( $author_id );?>"     class='posts__auther'>
+                    <div class="single_post__auther_wrap">
+                        <a href="<?php  echo get_author_posts_url( $author_id );?>"     class='single_post__auther'>
                             <img  class='most-popular-post__author_avatar'
                             src="<?php echo get_avatar_url($author_id)?>" alt="<?php echo get_the_author_meta('display_name', $author_id) ?>" >
 
@@ -85,38 +77,31 @@ class Elementor_posts extends \Elementor\Widget_Base {
             </div>
             <!-- Posts Meta Info End -->
             <!-- --------------------------- -->
-            <div class='posts_text__info'>
+            <div class='single_post_text__info'>
                 <!-- Post Title -->
-                <a href="<?php the_permalink(); ?>" class="most-popular-posts__post__title">
-                    <?php echo substr(get_the_title(), 0, 40 ); ?>
+                <a href="<?php the_permalink(); ?>" class="single_post__post__title">
+                    <?php echo get_the_title(); ?>
                 </a>
                 <!-- Post Description  -->
                 <p>
                 <?php
                     $post_content= get_the_content();
-                    echo substr( $post_content, 0, 300); ?>
+                    echo  $post_content; ?>
                 </p>
 
-                <a class='btn btn__post' href="<?php the_permalink(); ?>" class="most-popular-posts__post__title">
-                Continue Reading
-
-                <svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-right" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path></svg>
-
-                </a>
+            
 
             
             </div>
         </div>
         </article>
-                         <?php endwhile; ?>
-                        <?php wp_reset_query(); ?>
-                <?php endif; ?>
+        
         </section>
     <?php
     }
     protected function render_inline_styles(){ ?>
          <style>
-            .posts_row {
+            .single_post_row {
                 display: flex;
                 flex-direction: column;
                 gap: 55px;
@@ -124,29 +109,29 @@ class Elementor_posts extends \Elementor\Widget_Base {
             .post_thumb a img {
                 border-radius: 25px;
             }
-            .posts__auther{
+            .single_post__auther{
                 display:flex;
                 align-items: center;
                 gap: 15px;
             }
-            .posts__auther img {
+            .single_post__auther img {
                 width: 50px;
                 height: 50px;
                 object-fit: cover;
                 border-radius: 50px;
             }
-            .posts__auther h3 {
+            .single_post__auther h3 {
                 margin: 0px;
                 font-size: 17px;
                 font-weight: 400;
                 color: #262420;
             }
             @media only screen and (min-width:425px){
-                .posts__auther h3 {
+                .single_post__auther h3 {
                 font-size: 20px;
                 }
             }
-            .posts__meta_info_wrap {
+            .single_post__meta_info_wrap {
                 display: flex;
                 align-items: center;
                 gap: 25px;
@@ -175,10 +160,10 @@ class Elementor_posts extends \Elementor\Widget_Base {
                 padding: 0px;
                 fill: var(--e-global-color-primary);
             }
-            .posts_text__info{
+            .single_post_text__info{
                 margin-top:10px;
             }
-            .posts_text__info a {
+            .single_post_text__info a {
                 color: #222222;
                 font-size: 25px;
                 line-height:1.2em;
@@ -187,21 +172,21 @@ class Elementor_posts extends \Elementor\Widget_Base {
                 margin-bottom:10px;
             }
             @media only screen and (min-width:768px){
-                .posts_text__info a {
+                .single_post_text__info a {
                 font-size: 34px;
             }
             }
 
-            .posts_text__info a:hover {
+            .single_post_text__info a:hover {
                 color:var(--e-global-color-primary)
             }
-            .posts_text__info p {
+            .single_post_text__info p {
                 font-size: 18px;
                 color: #585858;
                 margin: 10px 0;
             }
             @media only screen and (min-width:768px){
-                .posts_text__info p {
+                .single_post_text__info p {
                 font-size: 20px;
             }
             }

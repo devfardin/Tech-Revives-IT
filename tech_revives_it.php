@@ -27,12 +27,15 @@ function cf_elementor_addon( $widgets_manager ) {
 	require_once( __DIR__ . '/includes/widgets/all_categories.php' );
 	require_once( __DIR__ . '/includes/widgets/all_post_tags.php' );
 	require_once( __DIR__ . '/includes/widgets/recent_works.php' );
+	require_once( __DIR__ . '/includes/widgets/single_post.php' );
 	$widgets_manager->register( new \Elementor_website_logo());
 	$widgets_manager->register( new \Elementor_posts());
 	$widgets_manager->register( new \Elementor_search_box());
 	$widgets_manager->register( new \Elementor_most_popular_post);
 	$widgets_manager->register( new \Elementor_all_categories);
 	$widgets_manager->register( new \Elementor_our_portfolio);
+	$widgets_manager->register( new \Elementor_all_post_tags);
+	$widgets_manager->register( new \Elementor_single_post);
 }
 add_action( 'elementor/widgets/register', 'cf_elementor_addon' );
 

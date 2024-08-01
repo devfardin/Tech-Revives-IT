@@ -101,12 +101,13 @@ class Elementor_most_popular_post extends \Elementor\Widget_Base {
                 .most_popular_posts_desc a {
                     font-size: 17px;
                     font-weight: 400;
-                    color: #ffffff;
+                    color: #ffffff !important;
                     transition: 0.4s;
+                    line-height:1.0em;
                 }
 
                 .most_popular_posts_desc a:hover {
-                    color: var(--e-global-color-primary);
+                    color: var(--e-global-color-primary) !important;
                 }
                 .no_popular_posts h3{
                     font-size:18px;
